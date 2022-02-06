@@ -228,7 +228,7 @@ def pregunta_07():
 
     lst = []
     for key, value in dicc.items():
-        lst.append((key, value))
+        lst.append((int(key), value))
     lst.sort()
 
     return lst
@@ -267,7 +267,7 @@ def pregunta_08():
 
     lst = []
     for key, value in dicc.items():
-        lst.append((key, value))
+        lst.append((key, list(value)))
     lst.sort()
 
     return lst
