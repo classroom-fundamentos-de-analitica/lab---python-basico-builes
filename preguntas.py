@@ -16,7 +16,6 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 def leer_csv():
     file = open('data.csv', 'r')
     data = file.readlines()
-
     return data
 
 
