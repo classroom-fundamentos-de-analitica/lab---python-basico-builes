@@ -199,7 +199,6 @@ def pregunta_07():
     Retorne una lista de tuplas que asocien las columnas 0 y 1. Cada tupla contiene un
     valor posible de la columna 2 y una lista con todas las letras asociadas (columna 1)
     a dicho valor de la columna 2.
-
     Rta/
     [
         (0, ["C"]),
@@ -213,7 +212,6 @@ def pregunta_07():
         (8, ["E", "D", "E", "A", "B"]),
         (9, ["A", "B", "E", "A", "A", "C"]),
     ]
-
     """
 
     data = leer_csv()
