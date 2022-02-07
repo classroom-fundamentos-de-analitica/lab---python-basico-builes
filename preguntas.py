@@ -16,7 +16,6 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 def leer_csv():
     file = open('data.csv', 'r')
     data = file.readlines()
-
     return data
 
 
@@ -200,7 +199,6 @@ def pregunta_07():
     Retorne una lista de tuplas que asocien las columnas 0 y 1. Cada tupla contiene un
     valor posible de la columna 2 y una lista con todas las letras asociadas (columna 1)
     a dicho valor de la columna 2.
-
     Rta/
     [
         (0, ["C"]),
@@ -214,7 +212,6 @@ def pregunta_07():
         (8, ["E", "D", "E", "A", "B"]),
         (9, ["A", "B", "E", "A", "A", "C"]),
     ]
-
     """
 
     data = leer_csv()
@@ -229,7 +226,7 @@ def pregunta_07():
 
     lst = []
     for key, value in dicc.items():
-        lst.append((key, value))
+        lst.append((int(key), value))
     lst.sort()
 
     return lst
