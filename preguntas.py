@@ -241,7 +241,6 @@ def pregunta_08():
     de la segunda columna; la segunda parte de la tupla es una lista con las letras
     (ordenadas y sin repetir letra) de la primera  columna que aparecen asociadas a dicho
     valor de la segunda columna.
-
     Rta/
     [
         (0, ["C"]),
@@ -255,7 +254,6 @@ def pregunta_08():
         (8, ["A", "B", "D", "E"]),
         (9, ["A", "B", "C", "E"]),
     ]
-
     """
     data = leer_csv()
     dicc = {}
@@ -268,7 +266,7 @@ def pregunta_08():
 
     lst = []
     for key, value in dicc.items():
-        lst.append((key, value))
+        lst.append((key, sorted(list(value))))
     lst.sort()
 
     return lst
