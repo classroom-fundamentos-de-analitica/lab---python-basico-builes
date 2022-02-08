@@ -258,7 +258,7 @@ def pregunta_08():
     for line in data:
         splited_line = line.split('\t')
         col_0 = splited_line[0]
-        col_1 = splited_line[1]
+        col_1 = int(splited_line[1])
         dicc[col_1] = dicc.get(col_1, set({})).union({col_0})
 
     lst = []
