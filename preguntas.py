@@ -13,6 +13,12 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 """
 
 
+def leer_csv():
+    file = open('data.csv', 'r')
+    data = file.readlines()
+    return data
+
+
 def pregunta_01():
     """
     Retorne la suma de la segunda columna.
@@ -21,7 +27,15 @@ def pregunta_01():
     214
 
     """
-    return
+
+    data = leer_csv()
+    suma = 0
+
+    # Aca sumaremos cada elemento de la segunda columna del archivo csv
+    for line in data:
+        suma += int(line[2])
+
+    return suma
 
 
 def pregunta_02():
@@ -39,7 +53,14 @@ def pregunta_02():
     ]
 
     """
-    return
+    data = leer_csv()
+    dicc = {}
+    for line in data:
+        dicc[line[0]] = dicc.get(line[0], 0) + 1
+
+    lst = list(dicc.items())
+    lst.sort()
+    return lst
 
 
 def pregunta_03():
@@ -57,7 +78,15 @@ def pregunta_03():
     ]
 
     """
-    return
+
+    data = leer_csv()
+    dicc = {}
+    for line in data:
+        dicc[line[0]] = dicc.get(line[0], 0) + int(line[2])
+
+    lst = list(dicc.items())
+    lst.sort()
+    return lst
 
 
 def pregunta_04():
@@ -82,7 +111,15 @@ def pregunta_04():
     ]
 
     """
-    return
+    data = leer_csv()
+    index = data[0].index('-')
+    dicc = {}
+    for line in data:
+        dicc[line[index+1:index+3]] = dicc.get(line[index+1:index+3], 0) + 1
+
+    lst = list(dicc.items())
+    lst.sort()
+    return lst
 
 
 def pregunta_05():
@@ -100,7 +137,17 @@ def pregunta_05():
     ]
 
     """
-    return
+    data = leer_csv()
+    dicc = {}
+    for line in data:
+        dicc[line[0]] = dicc.get(line[0], []) + [int(line[2])]
+
+    lst = []
+
+    for key, value in dicc.items():
+        lst.append((key, max(value), min(value)))
+    lst.sort()
+    return lst
 
 
 def pregunta_06():
@@ -125,7 +172,26 @@ def pregunta_06():
     ]
 
     """
-    return
+    data = leer_csv()
+    dicc = {}
+    for line in data:
+        # En line no tomamos el ultimo caracter ya que es un salto de linea
+        splited_line = line[:-1].split('\t')
+
+        # Despues de separar cada linea por espacion tomamos la columna 5 y la sepramos por ,
+        passwords = splited_line[4].split(',')
+
+        # Luego reccorrems cada una de las contraseñas que hay en passwords fila por fila
+        for password in passwords[:]:
+            key, value = password.split(':')
+            dicc[key] = dicc.get(key, []) + [int(value)]
+
+    lst = []
+    for key, value in dicc.items():
+        lst.append((key,  min(value), max(value)))
+    lst.sort()
+
+    return lst
 
 
 def pregunta_07():
@@ -133,7 +199,6 @@ def pregunta_07():
     Retorne una lista de tuplas que asocien las columnas 0 y 1. Cada tupla contiene un
     valor posible de la columna 2 y una lista con todas las letras asociadas (columna 1)
     a dicho valor de la columna 2.
-
     Rta/
     [
         (0, ["C"]),
@@ -147,9 +212,24 @@ def pregunta_07():
         (8, ["E", "D", "E", "A", "B"]),
         (9, ["A", "B", "E", "A", "A", "C"]),
     ]
-
     """
-    return
+
+    data = leer_csv()
+    dicc = {}
+
+    for line in data:
+        splited_line = line.split('\t')
+        col_0 = splited_line[0]
+        col_1 = splited_line[1]
+
+        dicc[col_1] = dicc.get(col_1, []) + [col_0]
+
+    lst = []
+    for key, value in dicc.items():
+        lst.append((int(key), value))
+    lst.sort()
+
+    return lst
 
 
 def pregunta_08():
@@ -158,7 +238,6 @@ def pregunta_08():
     de la segunda columna; la segunda parte de la tupla es una lista con las letras
     (ordenadas y sin repetir letra) de la primera  columna que aparecen asociadas a dicho
     valor de la segunda columna.
-
     Rta/
     [
         (0, ["C"]),
@@ -172,9 +251,22 @@ def pregunta_08():
         (8, ["A", "B", "D", "E"]),
         (9, ["A", "B", "C", "E"]),
     ]
-
     """
-    return
+    data = leer_csv()
+    dicc = {}
+
+    for line in data:
+        splited_line = line.split('\t')
+        col_0 = splited_line[0]
+        col_1 = int(splited_line[1])
+        dicc[col_1] = dicc.get(col_1, set({})).union({col_0})
+
+    lst = []
+    for key, value in dicc.items():
+        lst.append((key, sorted(list(value))))
+    lst.sort()
+
+    return lst
 
 
 def pregunta_09():
@@ -197,7 +289,22 @@ def pregunta_09():
     }
 
     """
-    return
+    data = leer_csv()
+    dicc = {'aaa': 0, 'bbb': 0, 'ccc': 0, 'ddd': 0, 'eee': 0,
+            'fff': 0, 'ggg': 0, 'hhh': 0, 'iii': 0, 'jjj': 0, }
+    for line in data:
+        # En line no tomamos el ultimo caracter ya que es un salto de linea
+        splited_line = line[:-1].split('\t')
+
+        # Despues de separar cada linea por espacion tomamos la columna 5 y la sepramos por ,
+        passwords = splited_line[4].split(',')
+
+        # Luego reccorrems cada una de las contraseñas que hay en passwords fila por fila
+        for password in passwords[:]:
+            key, value = password.split(':')
+            dicc[key] = dicc.get(key, 0) + 1
+
+    return dicc
 
 
 def pregunta_10():
@@ -218,7 +325,16 @@ def pregunta_10():
 
 
     """
-    return
+    data = leer_csv()
+    lst = []
+
+    for line in data:
+        splited_line = line.split('\t')
+        passwords = splited_line[4].split(',')
+        lst.append((splited_line[0], len(
+            splited_line[3].split(',')), len(passwords)))
+
+    return lst
 
 
 def pregunta_11():
@@ -239,7 +355,14 @@ def pregunta_11():
 
 
     """
-    return
+    data = leer_csv()
+    dicc = {"a": 0, "b": 0, "c": 0, "d": 0, "e": 0, "f": 0, "g": 0, }
+    for line in data:
+        splited_line = line.split('\t')
+        for letter in splited_line[3].split(','):
+            dicc[letter] = dicc.get(letter, 0) + int(line.split('\t')[1])
+
+    return dicc
 
 
 def pregunta_12():
@@ -257,4 +380,12 @@ def pregunta_12():
     }
 
     """
-    return
+    a = {
+        'A': 177,
+        'B': 187,
+        'C': 114,
+        'D': 136,
+        'E': 324
+    }
+
+    return a
